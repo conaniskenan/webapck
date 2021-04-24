@@ -3,19 +3,15 @@ const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { DefinePlugin } = require('webpack')
-const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+
 module.exports = {
-	mode: 'development',
-	devtool: 'eval-cheap-module-source-map', //生产模式不要eval
-	entry: './src/index.js', //使用相对路径时是基于context
+	entry: { main: './src/index.js' }, //使用相对路径时是基于context
 	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: 'js/bundle.js',
-	},
-	//treeshaking
-	optimization: {
-		usedExports: true,
+		path: path.resolve(__dirname, '../dist'),
+		filename: '[name].js',
+		chunkFilename:'[name].chunk.js'
 	},
 	resolve: {
 		// extensions:['.wasm','.mjs','.js','.json','.vue','.ts']
@@ -23,20 +19,12 @@ module.exports = {
 			'@': path.resolve(__dirname, './src'),
 		},
 	},
-	devServer: {
-		// open: true,
-		contentBase: path.resolve(__dirname, 'dist'),
-		hot: true,
-		// hotOnly: true,
-		compress: true, //gzip
-		historyApiFallback: true,
-		proxy: {
-			'/api': {
-				target: 'http://127.0.0.1:3000',
-				// pathRewrite: { '^/api': '' },
-				changeOrigin: false, // target是域名的话，需要这个参数，
-				secure: false, // 设置支持https协议的代理
-			},
+	//优化
+	optimization: {
+		minimizer: [new TerserPlugin({ extractComments: false })], //版权注释不单独提取
+		usedExports: true,
+		splitChunks: {
+			chunks: 'all',
 		},
 	},
 	module: {
@@ -121,7 +109,6 @@ module.exports = {
 	},
 	plugins: [
 		new CleanWebpackPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			title: 'hypocrisy',
 			template: './public/index.html',
