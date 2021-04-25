@@ -1,6 +1,12 @@
-var msg = 'hello'
-var foo = function (info) {
-	console.log(info)
+let a = {
+	b: true,
 }
-var p = new Promise(function (reslove, reject) {})
-foo(msg)
+function foo() {
+	a.b = false
+}
+foo()
+let obj = {
+	name: a.b == true ? 1 : 2,
+}
+
+console.log(obj)
