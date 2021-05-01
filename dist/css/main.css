@@ -1,9 +1,0 @@
-
-.content {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  background-size: contain;
-}
-.content{width:308px;height:308px;color:#f00}

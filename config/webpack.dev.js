@@ -2,8 +2,6 @@
 const path = require('path')
 const webpack = require('webpack')
 
-
-
 module.exports = {
 	mode: 'development',
 	devtool: 'eval-cheap-module-source-map', //生产模式不要eval
@@ -13,7 +11,7 @@ module.exports = {
 		contentBase: path.resolve(__dirname, 'dist'),
 		inline: true,
 		hot: true,
-		hotOnly: true,
+		// hotOnly: true,
 		compress: true, //gzip
 		historyApiFallback: true,
 		proxy: {

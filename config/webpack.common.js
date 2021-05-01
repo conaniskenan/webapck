@@ -7,7 +7,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { DefinePlugin } = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = env => {
 	const commonConfig = {
@@ -23,14 +22,7 @@ module.exports = env => {
 				'@': path.resolve(__dirname, './src'),
 			},
 		},
-		//优化
-		optimization: {
-			minimizer: [new TerserPlugin({ extractComments: false })], //版权注释不单独提取
-			usedExports: true,
-			splitChunks: {
-				chunks: 'all',
-			},
-		},
+
 		module: {
 			rules: [
 				{
@@ -124,7 +116,6 @@ module.exports = env => {
 				template: './public/index.html',
 			}),
 			new DefinePlugin({
-				// eslint-disable-next-line quotes
 				BASE_URL: "'./'",
 			}),
 			new CopyWebpackPlugin({
@@ -141,7 +132,6 @@ module.exports = env => {
 			}),
 		],
 	}
-	// console.log(commonConfig.module.rules)
 	return env.production == true
 		? merge(commonConfig, prodConfig)
 		: merge(commonConfig, devConfig)
