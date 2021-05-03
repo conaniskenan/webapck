@@ -2,7 +2,7 @@
  * @Author: hypocrisy
  * @Date: 2021-04-14 21:08:53
  * @LastEditors: hypocrisy
- * @LastEditTime: 2021-05-03 15:08:19
+ * @LastEditTime: 2021-05-03 15:30:33
  * @FilePath: /webp/src/test.ts
  */
 /**
@@ -44,4 +44,5 @@ console.log(p.say('hello'))
 const f = (obj: <T extends getLength>(arg: T) => any): any => {
 	return obj
 }
+
 console.log(foo)
