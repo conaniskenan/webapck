@@ -7,9 +7,9 @@ env:
   REGISTRY_USERNAME: conaniskenan
   IMAGE_NAME: ${{ github.repository }}
   ORG: conaniskenan
-  HELM_REPO: webpack5-test-forkmain-deploy
-  APP_NAME: webpack5-test
-  SERVICE_NAME: sjl-test
+  HELM_REPO: webpack-forkmain-deploy
+  APP_NAME: webpack
+  SERVICE_NAME: webpack5
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
