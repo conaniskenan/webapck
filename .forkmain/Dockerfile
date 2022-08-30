@@ -4,7 +4,7 @@ WORKDIR /workdir
 
 COPY ./ ./
 
-RUN yarn install && yarn build
+RUN yarn install --frozen-lockfile && yarn build
 
 # nginx state for serving content
 FROM nginx:alpine AS runner
@@ -41,7 +41,7 @@ http {\
 
 RUN rm -rf ./*
 
-COPY --from=builder /workdir/dist/ ./
+COPY --from=builder /workdir/build/ ./
 
 EXPOSE 3000
 
